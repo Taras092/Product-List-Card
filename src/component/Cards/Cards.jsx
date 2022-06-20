@@ -24,7 +24,7 @@ export const Cards = ({ cardsList }) => {
   };
 
     const handleOrder = event => {
-      createCardsOrder(event).then(() => alert('Product success order'));
+      createCardsOrder(event).then((data) => console.log(data));
       setVisibleModalCards(false);
     };
 
