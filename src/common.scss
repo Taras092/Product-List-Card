@@ -1,0 +1,25 @@
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__content {
+  width: 384px;
+  min-height: 536px;
+  background: #ffffff;
+  padding: 16px;
+  border: none;
+  border-radius: 24px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #cccccc45;
+  z-index: 10;
+}
