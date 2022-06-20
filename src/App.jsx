@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { CreateUser } from './components/CreateUser/CreateUser';
-import { Header } from './components/Header/Header';
-import { Users } from './components/Users/UsersList';
+import { Cards } from './component/Cards/Cards';
+import { fetchCardsData, fetchCreateCardsData } from './gateway/gateway';
 import './common.scss';
-import { fetchToken, createUser, fetchUsersData } from './gateway/gateway';
-
 
 const App = () => {
-  const [token, setToken] = useState('');
+  const [cardsList, setCardsList] = useState([]);
 
-  useEffect(() => findTokken(), []);
+  useEffect(() => {
+    fetchCards()
+  }, []);
 
-  const findTokken = () => {
-    fetchToken().then(data => setToken(data.token));
-  };
+  const fetchCards = () => {
+    fetchCardsData().then(data => setCardsList(data));
+  }
 
-  const handleCreateUser = event => {
-    createUser(event, token).then(data => console.log(data));
-  };
 
-  const handleButtonClick = () => {
-    const hiddeElement = document.getElementById('userForm');
-    hiddeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  };
-
-  const handleButtonUserClick = () => {
-    const hiddeElement = document.getElementById('user_info');
-    hiddeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  };
-
-  return (
-      <div className="page">
-        <Header onClickButton={handleButtonClick} onClickUserButton={handleButtonUserClick} />
-        <Users />
-        <CreateUser onSubmit={handleCreateUser} />
-      </div>
-  );
+  return <Cards cardsList={cardsList} />;
 };
 
 export default App;
