@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import vector from '../../img/arrow-right.png';
 import dolar from '../../img/dolar.png';
 import './modalcards.scss';
-
 
 export const ModalCards = ({ card, onClose, onOrder }) => {
   const [hoverVector, setHoverVector] = useState(false);
@@ -24,13 +23,12 @@ export const ModalCards = ({ card, onClose, onOrder }) => {
 
   const handleName = event => {
     setUserName(event.target.value);
-    if (event.target.value < 2 && event.target.value > 20) {
-      setNameError('Name must be more than 2 characters and less 20 characters');
-      if (!event.target.value) {
-        setNameError('');
-      }
-    } else {
+    if (event.target.value < 3) {
+      setNameError('Name must be more than 3 characters');
+    } else if (!event.target.value) {
       setNameError('This field in required!');
+    } else {
+      setNameError('');
     }
   };
 
@@ -82,7 +80,7 @@ export const ModalCards = ({ card, onClose, onOrder }) => {
                 name="name"
                 placeholder="Name"
                 onBlur={e => handleBlure(e)}
-                onChange={handleName}
+                onChange={e => handleName(e)}
                 value={userName}
                 required
               />
@@ -97,7 +95,7 @@ export const ModalCards = ({ card, onClose, onOrder }) => {
                 name="phone"
                 placeholder="+38(XXX) XXX - XX - XX"
                 onBlur={e => handleBlure(e)}
-                onChange={handlePhone}
+                onChange={e => handlePhone(e)}
                 value={phone}
                 required
               />
